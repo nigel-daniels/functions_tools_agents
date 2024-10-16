@@ -20,4 +20,5 @@ When you restart the shell or your machine the environment variable `OPENAI_API_
 Before trying any of the exercises don't forget to run `npm install` in the `./function_tools_agents` directory to install the Node modules needed.
 
 In each subdirectory you will find a `*.js` file and, sometimes, some supporting files. Each JS file contains multiple prompts.
+
 In most cases the initial exercise is ready to run and the other exercises are commented out using the `\* ... *\` comment markers. In these cases the commented code blocks will have their own calls to the LLM. If you uncomment these blocks then be sure to comment out the last to calls above while you run that exercise, it will reduce run time and costs.
