@@ -3,8 +3,8 @@
 A syntax to make using chains simpler. LangChain composes chains of components, LCE and the runnable protocol define:
 
 ```
-						   Means of modifying
-					      parameters at runtime
+                           Means of modifying
+                          parameters at runtime
                                (bind, ...)
                                     |
                                     v
@@ -13,17 +13,18 @@ A syntax to make using chains simpler. LangChain composes chains of components, 
 ---->|                |---->|                |---->|                |---->
      |                |  ^  |                |  ^  |                |
       ----------------   |   ----------------   |   ----------------
-	  					 |          ^           |
-						 |          |           |
-				An allowed set   Required   And output
-				of input types   methods      types
-							(invoke, stream
-							 batch, ... )
+                         |          ^           |
+                         |          |           |
+                An allowed set   required   and output
+                of input types,  methods.     types
+                                 (invoke,
+                                  stream,
+                                  batch)
 ```
-Composition can now use the Linux pipe syntax:
+Composition can now use the a `pipe` syntax:
 
 ```
-Chain = prompt | llm | OutputParser
+chain = prompt.pipe(llm).pipe(new OutputParser);
 ```
 
 NB. We need to install `LangchainJS`.

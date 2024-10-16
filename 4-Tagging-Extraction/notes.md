@@ -11,7 +11,7 @@
 |______|         ^          ... }   
                  |
              structure
-			description
+            description
 ```
 
 ## Extraction
@@ -28,5 +28,5 @@
 |______|         ^            ... },   
                  |          ...
              structure     ]
-			description
+            description
 ```
