@@ -30,3 +30,9 @@
              structure     ]
             description
 ```
+
+## Note
+To follow the third example you will need to install the `Cheerio` web page loader and the `Langchain.JS` community code to use it:
+```
+npm install @langchain/community cheerio
+```

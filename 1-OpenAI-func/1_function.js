@@ -3,8 +3,8 @@ import util from 'util';
 
 // Set up an OpenAI model (Note the key is in our ENV)
 const openai = new OpenAI({
-	organization: 	'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-	project:		'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+	organization: 	'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // Replace with your own
+	project:		'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx' // Replace with your own
 });
 
 openai.api_key = process.env.OPENAI_API_KEY;

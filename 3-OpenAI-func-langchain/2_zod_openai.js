@@ -3,8 +3,6 @@ import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { z } from 'zod';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
-import { convertToOpenAIFunction } from '@langchain/core/utils/function_calling';
-
 let model = new ChatOpenAI();
 
 const weatherSearch = z.object({
