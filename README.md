@@ -6,7 +6,7 @@ This course covers the following features and I have made notes based on the cou
 - [LangChain Expression Language (LCEL)](2-LCEL/notes.md)
 - [OpenAI function calling in LangChain](3-OpenAI-func-langchain/notes.md)
 - [Tagging and extraction using OpenAI function calling](4-Tagging-Extraction/notes.md)
-- [Tools and Routing]()
+- [Tools and Routing](5-tools-routing/notes.md)
 - [Conversational Agent]()
 
 ## Set-Up
