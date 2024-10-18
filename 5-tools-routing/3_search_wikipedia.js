@@ -1,25 +1,25 @@
-import { tool } from '@langchain/core/tools';
+import { DynamicStructuredTool } from '@langchain/core/tools';
+import { convertToOpenAIFunction } from '@langchain/core/utils/function_calling';
 import { z } from 'zod';
-import { zodToJsonSchema } from 'zod-to-json-schema';
 import wikipedia from 'wikipedia';
-import { formatToOpenAITool } from 'langchain/tools';
 
 const searchInput = z.object({
 	query: z.string()
 });
 
-export const SearchWikipedia = tool(
-	async (input) => new Promise(
+export const searchWikipedia = new DynamicStructuredTool ({
+	name: 'searchWikipedia',
+	description: 'Run Wikipedia search and get page summaries.',
+	schema: searchInput,
+	func: async ({query}) => new Promise(
 		async (resolve, reject) => {
-			const pageTitles = await wikipedia.search(input.query);
+			const pageTitles = await wikipedia.search(query);
 			let summaries = [];
 
 			for (const pageTitle of pageTitles.results.slice(0, 3)) {
 				try {
 					const page = await wikipedia.page(pageTitle.title, {autoSuggest: false});
-					//console.log(page);
 					const summary = await page.summary();
-					//console.log(summary);
 					summaries = [...summaries, 'Page: ' + summary.title +'\nSummary: ' +summary.extract];
 				} catch (e) {
 					reject(e.message);
@@ -32,13 +32,14 @@ export const SearchWikipedia = tool(
 				resolve('No good Wikipedia Search Result was found.');
 			}
 		}
-	),
-	{
-		name: 'SearchWikipedia',
-		description: 'Run Wikipedia search and get page summaries.',
-		schema: zodToJsonSchema(searchInput)
-	}
-);
+	)
+});
 
-const result1 = await SearchWikipedia.invoke({query: 'langchain'});
+/*
+// Comment these out after use to reuse this tool later
+const searchWikipediaFunc = convertToOpenAIFunction(searchWikipedia);
+console.log(searchWikipediaFunc);
+
+const result1 = await searchWikipedia.invoke({query: 'langchain'});
 console.log(result1);
+*/

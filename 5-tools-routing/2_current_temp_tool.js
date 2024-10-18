@@ -1,21 +1,26 @@
-import { tool } from '@langchain/core/tools';
+import { ChatOpenAI } from '@langchain/openai';
+import { convertToOpenAIFunction } from '@langchain/core/utils/function_calling';
+import { DynamicStructuredTool } from '@langchain/core/tools';
 import { z } from 'zod';
-import { zodToJsonSchema } from 'zod-to-json-schema';
-import { formatToOpenAITool } from 'langchain/tools';
 
-const openMeteoInput = z.object({
+const getCurrentTempInput = z.object({
 	latitude: z.number().describe('Latitude of the location to fetch weather data for'),
 	longitude: z.number().describe('Longitude of the location to fetch weather data for')
 });
 
-
-export const CurrentTemp = tool(
-	async (input) => new Promise(
+// Note in JS if we want more than a single input we cannot use the 'tool'
+// convinence as it returns a StructuredTool that expects a single input.
+// In this case we need the DynamicStructuredTool
+export const getCurrentTemp = new DynamicStructuredTool({
+	name: 'getCurrentTemp',
+	description: 'Fetch current temperature for given coordinates.',
+	schema: getCurrentTempInput,
+	func: async ({latitude, longitude}) => new Promise(
 		async (resolve, reject) => {
 			const BASE_URL = 'https://api.open-meteo.com/v1/forecast?';
 			const params = {
-				latitude: input.latitude,
-				longitude: input.longitude,
+				latitude: latitude,
+				longitude: longitude,
         		hourly: 'temperature_2m',
         		forecast_days: 1
 			};
@@ -44,16 +49,14 @@ export const CurrentTemp = tool(
 
 			resolve('The current temperature is ' + currentTemperature + '°C');
 		}
-	),
-	{
-		name: 'CurrentTemp',
-		description: 'Fetch current temperature for given coordinates.',
-		schema: zodToJsonSchema(openMeteoInput)
-	}
-);
+	)
+});
 
-const openAiJson = formatToOpenAITool(CurrentTemp);
-console.log(openAiJson);
+/*
+// Comment these out after use to reuse this tool later
+const currentTempFunc = convertToOpenAIFunction(getCurrentTemp);
+console.log(currentTempFunc);
 
-const result1 = await CurrentTemp.invoke({latitude: 13, longitude: 14});
-console.log(result1);
+const result = await getCurrentTemp.invoke({latitude: 13, longitude: 14});
+console.log(result);
+*/

@@ -1,13 +1,12 @@
 import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
-import { zodToJsonSchema } from 'zod-to-json-schema';
 
 const searchInput = z.object({
 	query: z.string().describe('Thing to search for')
 });
 
 const searchWeather = tool(
-	async (query) => new Promise(
+	async ({query}) => new Promise(
 		(resolve, reject) => {
 			setTimeout(() => {resolve('5.5 C');}, 250);
 		}
@@ -15,7 +14,7 @@ const searchWeather = tool(
 	{
 		name: 'searchWeather',
 		description: 'Search for the weather online.',
-		schema: zodToJsonSchema(searchInput)
+		schema: searchInput
 	}
 );
 

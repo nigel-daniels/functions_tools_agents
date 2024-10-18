@@ -10,6 +10,7 @@ This exercise covers:
 - Creating your own tools
 - Building a tool based on an OpenAI spec:
 	- Predating LLMs the OpenAI spec. is routinely used by providers to describe their APIs.
+	- Note in `LangChain.JS` we need to generate a chain then wrap it as a tool.
 - Selecting from multiple tools, called 'Routing'.
 
 ## Note
