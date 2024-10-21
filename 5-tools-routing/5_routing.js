@@ -49,19 +49,18 @@ console.log(result6.returnValues);
 /*
 // Here is a routing function
 async function route(result) {
-    if (result.tool) {
+	if ('log' in result && 'returnValues' in result) {  // These properties indicate this is an AgentFinish
+		return result.returnValues.output;
+    } else {
 		const tools = {
             'searchWikipedia': searchWikipedia,
             'getCurrentTemp': getCurrentTemp,
-        };
-		return await eval(result.tool).invoke(result.toolInput);
-    } else {
-        return result.returnValues.output;
+		};
+		return await tools[result.tool].invoke(result.toolInput);
     }
 }
 
 const chain3 = prompt.pipe(model).pipe(new OpenAIFunctionsAgentOutputParser()).pipe(route);
-
 
 const result7 = await chain3.invoke({input: 'What is the weather in SF right now?'});
 console.log(result7);

@@ -34,7 +34,7 @@ npm install langchain
 ```
 
 ## Interface
-- Common implement "Runnable" protocol
+- Common implement `Runnable` protocol
 - Common methods include:
 	- invoke
 	- stream
@@ -50,8 +50,8 @@ Prompt|Dictionary|Prompt Value
 Retriever|Single String|List of Documents
 LLM| String, list of messages or Prompt Value| String
 ChatModel|String, list of messages or Prompt Value|ChatMessage
-Tool|String, Dictionary|Tool dependant
-|Output Parser|Output of LLM or ChatModel|Parser dependant
+Tool|String, Dictionary|Tool dependent
+|Output Parser|Output of LLM or ChatModel|Parser dependent
 
 
 ## Why use LCEL
