@@ -4,18 +4,18 @@ import { createOpenAPIChain } from 'langchain/chains';
 import { OpenApiToolkit } from 'langchain/agents/toolkits';
 import { convertToOpenAIFunction } from '@langchain/core/utils/function_calling';
 import * as fs from 'fs';
-import * as yaml from 'js-yaml';
 
 // Note there is no direct equivalent of the `openapi_spec_to_openai_fn` method
+// This section currently fails to function in LangChain.JS
 let model = new ChatOpenAI({
   temperature: 0
 });
 
-const petYaml =  fs.readFileSync('./petstore.yaml', 'utf8');
-const peteObj = yaml.load(petYaml);
-const petSpec = new JsonSpec(peteObj);
+// Read the spec as a string
+const petYaml = fs.readFileSync('./petstore.yaml', 'utf8');
 
-const petChain = createOpenAPIChain(petSpec);
+// This is an attempt to load the spec as a chain however it does not appear to return a valid chain
+const petChain = createOpenAPIChain(petYaml);
 const petTool = new DynamicStructuredTool(petChain);
 const petFunc = convertToOpenAIFunction(petTool);
 
