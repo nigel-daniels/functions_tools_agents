@@ -1,5 +1,5 @@
 # Functions, Tools and Agents with LangChain
-Test code for 'talking to your files' with the ChatGPT API. This is based on the DeepLearning.AI, [Functions, Tools and Agents with LangChain](https://learn.deeplearning.ai/courses/functions-tools-agents-langchain/) course. In this repository I have converted all of the examples from Python to JavaScript.
+This is based on the DeepLearning.AI, [Functions, Tools and Agents with LangChain](https://learn.deeplearning.ai/courses/functions-tools-agents-langchain/) course. In this repository I have converted all of the examples from Python to JavaScript.
 ## New Langchain features covered
 This course covers the following features and I have made notes based on the course presentation for each lesson and I've included any JavaScript specific set-up or changes.
 - [OpenAI function calling](1-OpenAI-func/notes.md)
